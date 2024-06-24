@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +29,14 @@ public class Calendar {
             days.put(localDate, dayType);
         } else {
             throw new RuntimeException("Date " + date + " is not in the range between " + startDate + " and " + endDate);
+        }
+    }
+
+    public void fillCalendar(String startDate, String endDate) {
+        LocalDate day = LocalDate.parse(startDate);
+        for (var i = 0; i < ChronoUnit.DAYS.between(LocalDate.parse(startDate), LocalDate.parse(endDate)); i++) {
+            days.put(day, DayTypes.NORMAL);
+            day = day.plusDays(1);
         }
     }
 }
