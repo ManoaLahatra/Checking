@@ -9,6 +9,6 @@ public class CheckIn {
     private final Calendar calendar;
 
     public DayTypes getDayOfCalendar(LocalDate date) {
-        return calendar.getDays().get(date);
+        return calendar.getDays().getOrDefault(date, DayTypes.NORMAL);
     }
 }
