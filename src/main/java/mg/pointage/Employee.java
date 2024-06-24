@@ -52,7 +52,7 @@ public class Employee {
         int nightHours = 0;
 
         for (int hour = startHour; hour < endHour; hour++) {
-            if (hour >= 18 || hour < 6) {
+            if (hour >= 18 || hour < 8) {
                 nightHours++;
             } else {
                 dayHours++;
@@ -100,6 +100,21 @@ public class Employee {
             case SUNDAY -> 1.4;
             case FEAST -> 1.5;
         };
+    }
+
+    public void fillChecking(String startDate, String endDate, int startHour, int endHour) {
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+
+        if (start.isAfter(end)) {
+            LocalDate temp = start;
+            start = end;
+            end = temp;
+        }
+
+        for (LocalDate day = start; !day.isAfter(end); day = day.plusDays(1)) {
+            this.work(day.toString(), startHour, endHour);
+        }
     }
 
 }
